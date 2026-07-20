@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro da momolada ❤️</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>⏱️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-midnight">
+
+    <div id="notification" class="notification"></div>
+
+    <header class="top-bar">
+        <div class="brand-logo">Pomodoro da momolada ❤️</div>
+        <button id="menu-toggle" class="menu-btn" aria-label="Escolher Tema">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+    </header>
+
+    <main class="main-container">
+        <section class="todo-sidebar">
+            <div class="sidebar-header-visual">Missões</div>
+            <div class="todo-input-wrapper">
+                <input type="text" id="todo-input" placeholder="Nova tarefa... (Pressione Enter)" autocomplete="off">
+            </div>
+            <ul id="todo-list" class="todo-list"></ul>
+        </section>
+
+        <section class="pomodoro-center">
+            <div class="inputs-row">
+                <div class="input-group">
+                    <label for="work-time-input">Foco (min)</label>
+                    <input type="number" id="work-time-input" min="1" max="480" value="25">
+                </div>
+                <div class="input-group">
+                    <label for="rest-time-input">Descanso (min)</label>
+                    <input type="number" id="rest-time-input" min="1" max="120" value="5">
+                </div>
+            </div>
+
+            <div class="timer-display-container" id="timer-container">
+                <svg class="progress-ring" width="360" height="360">
+                    <circle class="progress-ring__bg" stroke-width="6" fill="transparent" r="165" cx="180" cy="180"/>
+                    <circle class="progress-ring__circle" stroke-width="6" fill="transparent" r="165" cx="180" cy="180"/>
+                </svg>
+                <div class="timer-text-wrapper">
+                    <span id="timer-status" class="timer-status">TRABALHO</span>
+                    <span id="timer-countdown" class="timer-countdown">00:25:00</span>
+                </div>
+            </div>
+
+            <div class="controls-wrapper">
+                <button id="btn-main" class="btn btn-primary">INICIAR</button>
+                <div id="extra-controls" class="extra-controls hidden">
+                    <button id="btn-pause" class="btn btn-secondary">PAUSAR</button>
+                    <button id="btn-reset" class="btn btn-secondary">REINICIAR</button>
+                    <button id="btn-stop" class="btn btn-danger">PARAR</button>
+                </div>
+            </div>
+
+            <div class="motivation-container">
+                <div class="motivation-card">
+                    <span class="quote-mark">“</span>
+                    <p id="motivation-text" class="motivation-text"></p>
+                    <span class="quote-mark text-right">”</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside id="config-sidebar" class="config-sidebar">
+        <div class="config-sidebar-header">
+            <h3>Temas Premium</h3>
+            <button id="config-close" class="config-close-btn">&times;</button>
+        </div>
+        
+        <ul class="theme-selector-list">
+            <li data-theme="midnight" class="theme-option active">
+                <span class="theme-dot" style="background: #09090b;"></span> ⚫ Midnight Black
+            </li>
+            <li data-theme="clean-white" class="theme-option">
+                <span class="theme-dot" style="background: #ffffff; border: 1px solid #e4e4e7;"></span> ⚪ Clean White
+            </li>
+            <li data-theme="ocean-blue" class="theme-option">
+                <span class="theme-dot" style="background: #0ea5e9;"></span> 🔵 Ocean Blue
+            </li>
+            <li data-theme="sunset-orange" class="theme-option">
+                <span class="theme-dot" style="background: #f97316;"></span> 🟠 Sunset Orange
+            </li>
+            <li data-theme="sakura-pink" class="theme-option">
+                <span class="theme-dot" style="background: #ec4899;"></span> 🌸 Sakura Pink
+            </li>
+            <li data-theme="ruby-red" class="theme-option">
+                <span class="theme-dot" style="background: #dc2626;"></span> 🔴 Ruby Red
+            </li>
+            <li data-theme="forest-green" class="theme-option">
+                <span class="theme-dot" style="background: #10b981;"></span> 🟢 Forest Green
+            </li>
+            <li data-theme="purple-night" class="theme-option">
+                <span class="theme-dot" style="background: #8b5cf6;"></span> 🟣 Purple Night
+            </li>
+        </ul>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>

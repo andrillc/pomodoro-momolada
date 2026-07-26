@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,22 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>⏱️</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="theme-midnight">
 
     <div id="notification" class="notification"></div>
 
     <header class="top-bar">
+        <button id="sidebar-toggle" class="hamburger-btn" aria-label="Alternar Missões">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
         <div class="brand-logo">Pomodoro da momolada ❤️</div>
         <button id="menu-toggle" class="menu-btn" aria-label="Escolher Tema">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
         </button>
     </header>
 
@@ -31,18 +40,26 @@
             <div class="inputs-row">
                 <div class="input-group">
                     <label for="work-time-input">Foco (min)</label>
-                    <input type="number" id="work-time-input" min="1" max="480" value="25">
+                    <div class="custom-number-input">
+                        <button class="time-adjust-btn" id="work-minus">▼</button>
+                        <input type="number" id="work-time-input" min="1" max="480" value="25">
+                        <button class="time-adjust-btn" id="work-plus">▲</button>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label for="rest-time-input">Descanso (min)</label>
-                    <input type="number" id="rest-time-input" min="1" max="120" value="5">
+                    <div class="custom-number-input">
+                        <button class="time-adjust-btn" id="rest-minus">▼</button>
+                        <input type="number" id="rest-time-input" min="1" max="120" value="5">
+                        <button class="time-adjust-btn" id="rest-plus">▲</button>
+                    </div>
                 </div>
             </div>
 
             <div class="timer-display-container" id="timer-container">
                 <svg class="progress-ring" width="360" height="360">
-                    <circle class="progress-ring__bg" stroke-width="6" fill="transparent" r="165" cx="180" cy="180"/>
-                    <circle class="progress-ring__circle" stroke-width="6" fill="transparent" r="165" cx="180" cy="180"/>
+                    <circle class="progress-ring__bg" stroke-width="6" fill="transparent" r="165" cx="180" cy="180" />
+                    <circle class="progress-ring__circle" stroke-width="6" fill="transparent" r="165" cx="180" cy="180" />
                 </svg>
                 <div class="timer-text-wrapper">
                     <span id="timer-status" class="timer-status">TRABALHO</span>
@@ -74,7 +91,7 @@
             <h3>Temas Premium</h3>
             <button id="config-close" class="config-close-btn">&times;</button>
         </div>
-        
+
         <ul class="theme-selector-list">
             <li data-theme="midnight" class="theme-option active">
                 <span class="theme-dot" style="background: #09090b;"></span> ⚫ Midnight Black
@@ -105,4 +122,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

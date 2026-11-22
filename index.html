@@ -4,32 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro da momolada ❤️</title>
+    <title>Pomodoro</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>⏱️</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="theme-midnight">
+<body class="theme-clean-white" data-theme="clean-white">
 
     <div id="notification" class="notification"></div>
 
     <header class="top-bar">
-        <button id="sidebar-toggle" class="hamburger-btn" aria-label="Alternar Missões">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
-        <div class="brand-logo">Pomodoro da momolada ❤️</div>
-        <button id="menu-toggle" class="menu-btn" aria-label="Escolher Tema">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-        </button>
+        <div class="top-bar-left">
+            <button id="sidebar-toggle" class="hamburger-btn" aria-label="Alternar Missões" title="Alternar Lista de Missões">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Contador de Ofensiva estilo Duolingo -->
+            <div id="streak-badge" class="streak-badge" title="Dias de estudo seguidos (Ofensiva)">
+                <span class="streak-flame">🔥</span>
+                <span id="streak-count" class="streak-count">0</span>
+                <span id="streak-freeze-icon" class="streak-freeze-icon hidden" title="Bloqueio de ofensiva ativo!">🧊</span>
+            </div>
+        </div>
+
+        <div id="brand-logo" class="brand-logo">Pomodoro</div>
+
+        <div class="top-bar-right">
+            <!-- Botão de Salas de Estudo -->
+            <button id="rooms-btn" class="icon-nav-btn" aria-label="Salas de Estudo" title="Salas de Estudo Coletivo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span id="rooms-badge" class="badge-dot hidden"></span>
+            </button>
+
+            <!-- Botão de Amigos e Social -->
+            <button id="friends-btn" class="icon-nav-btn" aria-label="Amigos" title="Amigos e Impulso Diário">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <line x1="19" y1="8" x2="19" y2="14"></line>
+                    <line x1="22" y1="11" x2="16" y2="11"></line>
+                </svg>
+                <span id="friends-badge" class="badge-dot hidden"></span>
+            </button>
+
+            <!-- Botão Painel Admin VIP (Apenas is_admin) -->
+            <button id="admin-btn" class="icon-nav-btn hidden" aria-label="Painel Admin VIP" title="Painel Administrativo VIP">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+            </button>
+
+            <!-- Botão de Temas e Cores (Ícone de Paleta) -->
+            <button id="menu-toggle" class="icon-nav-btn" aria-label="Temas e Cores" title="Temas e Cores">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z"></path>
+                </svg>
+            </button>
+
+            <!-- Botão de Autenticação / Perfil -->
+            <button id="auth-btn" class="auth-nav-btn" aria-label="Minha Conta" title="Entrar ou Ver Perfil">
+                <span id="auth-btn-label">Entrar</span>
+            </button>
+        </div>
     </header>
 
     <main class="main-container">
         <section class="todo-sidebar">
-            <div class="sidebar-header-visual">Missões</div>
+            <div class="sidebar-header-visual">
+                <span>Missões</span>
+                <span id="cloud-sync-status" class="cloud-sync-status" title="Modo local (visitante)">💻 Local</span>
+            </div>
             <div class="todo-input-wrapper">
                 <input type="text" id="todo-input" placeholder="Nova tarefa... (Pressione Enter)" autocomplete="off">
             </div>
@@ -37,6 +94,19 @@
         </section>
 
         <section class="pomodoro-center">
+            <!-- Banner de Sala de Estudo Ativa (se conectado a uma sala) -->
+            <div id="active-room-banner" class="active-room-banner hidden">
+                <div class="active-room-info">
+                    <span class="room-indicator-pulse"></span>
+                    <span id="room-banner-text" class="room-banner-text">Sala de Estudo</span>
+                    <span id="room-mode-tag" class="room-mode-tag">Sincronizado</span>
+                </div>
+                <div class="active-room-actions">
+                    <span id="room-members-count" class="room-members-count">👥 1</span>
+                    <button id="btn-leave-room" class="btn-leave-room" title="Sair da Sala">Sair</button>
+                </div>
+            </div>
+
             <div class="inputs-row">
                 <div class="input-group">
                     <label for="work-time-input">Foco (min)</label>
@@ -86,6 +156,7 @@
         </section>
     </main>
 
+    <!-- Drawer de Temas -->
     <aside id="config-sidebar" class="config-sidebar">
         <div class="config-sidebar-header">
             <h3>Temas Premium</h3>
@@ -93,11 +164,11 @@
         </div>
 
         <ul class="theme-selector-list">
-            <li data-theme="midnight" class="theme-option active">
+            <li data-theme="midnight" class="theme-option">
                 <span class="theme-dot" style="background: #09090b;"></span> ⚫ Midnight Black
             </li>
-            <li data-theme="clean-white" class="theme-option">
-                <span class="theme-dot" style="background: #ffffff; border: 1px solid #e4e4e7;"></span> ⚪ Clean White
+            <li data-theme="clean-white" class="theme-option active">
+                <span class="theme-dot" style="background: #ffffff; border: 1px solid #cbd5e1;"></span> ⚪ Clean White
             </li>
             <li data-theme="ocean-blue" class="theme-option">
                 <span class="theme-dot" style="background: #0ea5e9;"></span> 🔵 Ocean Blue
@@ -119,6 +190,220 @@
             </li>
         </ul>
     </aside>
+
+    <!-- Drawer Social / Amigos -->
+    <aside id="friends-sidebar" class="config-sidebar social-sidebar">
+        <div class="config-sidebar-header">
+            <h3>Amigos & Social</h3>
+            <button id="friends-close" class="config-close-btn">&times;</button>
+        </div>
+
+        <div class="social-tabs">
+            <button class="social-tab-btn active" data-tab="tab-friends-list">Amigos</button>
+            <button class="social-tab-btn" data-tab="tab-friends-search">Buscar</button>
+            <button class="social-tab-btn" data-tab="tab-friends-requests">
+                Convites <span id="requests-badge-count" class="badge-count hidden">0</span>
+            </button>
+        </div>
+
+        <!-- Aba Amigos -->
+        <div id="tab-friends-list" class="social-tab-content active">
+            <div id="friends-empty-msg" class="social-empty-msg">Nenhum amigo adicionado ainda. Busque amigos para estudar juntos!</div>
+            <ul id="friends-ul" class="social-list"></ul>
+        </div>
+
+        <!-- Aba Buscar Amigos -->
+        <div id="tab-friends-search" class="social-tab-content">
+            <div class="search-input-wrapper">
+                <input type="text" id="friend-search-input" placeholder="Buscar por usuário (ex: ana)..." autocomplete="off">
+            </div>
+            <ul id="friend-search-results" class="social-list"></ul>
+        </div>
+
+        <!-- Aba Solicitações Pendentes -->
+        <div id="tab-friends-requests" class="social-tab-content">
+            <div id="incoming-requests-title" class="sub-section-title">Recebidos</div>
+            <ul id="incoming-requests-list" class="social-list"></ul>
+            <div id="outgoing-requests-title" class="sub-section-title">Enviados</div>
+            <ul id="outgoing-requests-list" class="social-list"></ul>
+        </div>
+    </aside>
+
+    <!-- Modal de Autenticação / Perfil -->
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="auth-modal-title">Entrar na sua Conta</h3>
+                <button class="modal-close-btn" id="auth-modal-close">&times;</button>
+            </div>
+
+            <!-- View para VISITANTE (Login / Cadastro) -->
+            <div id="auth-guest-view">
+                <div class="auth-tabs">
+                    <button class="auth-tab-btn active" id="tab-btn-login">Entrar</button>
+                    <button class="auth-tab-btn" id="tab-btn-register">Criar Conta</button>
+                </div>
+
+                <!-- Formulário de Login -->
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-ident">E-mail ou Usuário</label>
+                        <input type="text" id="login-ident" required placeholder="seu_usuario ou email@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-pass">Senha</label>
+                        <input type="password" id="login-pass" required placeholder="Sua senha secreta">
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit-btn">ENTRAR</button>
+                </form>
+
+                <!-- Formulário de Cadastro -->
+                <form id="register-form" class="auth-form hidden">
+                    <div class="form-group">
+                        <label for="reg-email">E-mail</label>
+                        <input type="email" id="reg-email" required placeholder="voce@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-username">Nome de Usuário (a-z, 0-9, _)</label>
+                        <input type="text" id="reg-username" required placeholder="ex: foco_total" pattern="[a-zA-Z0-9_]{3,30}" title="3 a 30 caracteres alfanuméricos ou underline">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-display">Nome de Exibição</label>
+                        <input type="text" id="reg-display" placeholder="Como quer ser chamado?">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-pass">Senha (mínimo 8 caracteres)</label>
+                        <input type="password" id="reg-pass" required minlength="8" placeholder="Senha segura">
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit-btn">CRIAR CONTA</button>
+                </form>
+
+                <!-- Container do Google Sign-In (Renderizado condicionalmente pelo JS) -->
+                <div id="google-auth-wrapper" class="google-auth-wrapper hidden">
+                    <div class="auth-separator"><span>ou</span></div>
+                    <div id="google-signin-btn-container"></div>
+                </div>
+            </div>
+
+            <!-- View para USUÁRIO LOGADO (Perfil e Configurações de Foco) -->
+            <div id="auth-logged-view" class="hidden">
+                <div class="profile-header-info">
+                    <div class="profile-avatar" id="profile-avatar-display">👤</div>
+                    <div class="profile-text-info">
+                        <h4 id="profile-name-display">Nome do Usuário</h4>
+                        <span id="profile-user-handle">@usuario</span>
+                        <span id="profile-plan-badge" class="profile-plan-badge">FREE</span>
+                    </div>
+                </div>
+
+                <form id="profile-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="profile-title-input">Título do Pomodoro</label>
+                        <input type="text" id="profile-title-input" placeholder="Pomodoro da momolada ❤️" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-display-input">Nome de Exibição</label>
+                        <input type="text" id="profile-display-input" placeholder="Seu nome" maxlength="100">
+                    </div>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="profile-focus-input">Foco Padrão (min)</label>
+                            <input type="number" id="profile-focus-input" min="1" max="180">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-break-input">Pausa Padrão (min)</label>
+                            <input type="number" id="profile-break-input" min="1" max="60">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-goal-input">Meta Diária de Foco (min)</label>
+                        <input type="number" id="profile-goal-input" min="1" max="600" placeholder="25">
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit-btn">SALVAR ALTERAÇÕES</button>
+                </form>
+
+                <div class="profile-actions-footer">
+                    <button id="btn-logout" class="btn btn-danger form-submit-btn">SAIR DA CONTA</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Salas de Estudo -->
+    <div id="rooms-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Salas de Estudo Coletivo</h3>
+                <button class="modal-close-btn" id="rooms-modal-close">&times;</button>
+            </div>
+
+            <div class="rooms-modal-body">
+                <!-- Seção de Convites Recebidos -->
+                <div id="rooms-invites-section" class="hidden">
+                    <div class="sub-section-title">Convites para Salas</div>
+                    <ul id="rooms-invites-list" class="social-list"></ul>
+                </div>
+
+                <!-- Formulário para Criar Nova Sala -->
+                <div class="sub-section-title">Criar Nova Sala</div>
+                <form id="create-room-form" class="create-room-form">
+                    <div class="form-group">
+                        <label for="room-friend-select">Convidar Amigo</label>
+                        <select id="room-friend-select" required>
+                            <option value="">Selecione um amigo...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="room-mode-select">Modo da Sala</label>
+                        <select id="room-mode-select">
+                            <option value="synced">Sincronizado (Mesmo timer para todos)</option>
+                            <option value="independent">Independente (Cada um no seu ritmo)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit-btn">CRIAR SALA</button>
+                </form>
+
+                <!-- Salas Ativas em que já participa -->
+                <div class="sub-section-title" style="margin-top: 25px;">Minhas Salas Ativas</div>
+                <div id="rooms-empty-msg" class="social-empty-msg">Nenhuma sala ativa no momento.</div>
+                <ul id="active-rooms-list" class="social-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal do Painel Admin VIP (Apenas para is_admin) -->
+    <div id="admin-modal" class="modal-overlay hidden">
+        <div class="modal-box modal-box-large">
+            <div class="modal-header">
+                <h3>👑 Painel do Criador - VIP Manual</h3>
+                <button class="modal-close-btn" id="admin-modal-close">&times;</button>
+            </div>
+
+            <div class="admin-modal-body">
+                <div class="sub-section-title">Buscar Usuário para Conceder/Revogar VIP</div>
+                <div class="search-input-wrapper">
+                    <input type="text" id="admin-search-input" placeholder="Buscar por usuário ou email..." autocomplete="off">
+                </div>
+                <ul id="admin-search-results" class="social-list admin-user-list"></ul>
+
+                <div class="sub-section-title" style="margin-top: 30px;">Assinantes VIP Manuais Ativos</div>
+                <ul id="admin-vips-list" class="social-list admin-user-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Comemorativo de Revelação de Congelamento de Ofensiva (Estilo Duolingo) -->
+    <div id="freeze-reveal-modal" class="modal-overlay hidden">
+        <div class="modal-box freeze-reveal-box">
+            <div class="freeze-animation-icon">🧊</div>
+            <h2>Proteção Desbloqueada!</h2>
+            <p>Você atingiu um marco constante de estudos! Ganhou um <strong>Bloqueio de Ofensiva</strong> surpresa para proteger seus dias de fogo caso você perca um dia de foco.</p>
+            <div class="freeze-status-badge">
+                <span>Ofensiva protegida</span>
+            </div>
+            <button id="btn-claim-freeze" class="btn btn-primary" style="margin-top: 20px;">INCRÍVEL, EQUIPAR!</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
